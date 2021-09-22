@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="email_or_phone_number">Email or phone number</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="show_email">Show Email</string>
+    <string name="hello_programming_world">Hello, Programming World!!!</string>
+    <string name="agriconnect">AgriConnect</string>
+    <string name="logo">Logo</string>
+    <string name="cancel">cancel</string>
+    <string name="jpgabule_advicers_gmail_com">gabs@gmail.com</string>
+    <string name="register">Submit</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_contact_number">Enter contact number</string>
+    <string name="enter_password">Enter password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="password_">password</string>
+    <string name="create_account">CREATE ACCOUNT</string>
+    <string name="become_an_adviser">BECOME AN ADVISER</string>
+    <string name="enter_company">Company name</string>
+    <string name="company_or_individual">Company or individual</string>
+    <string name="location">Location</string>
+    <string name="sample_text">sample text</string>
+    <string name="concerns_">Concerns</string>
+    <string name="posted">Posted</string>
+    <string name="profile">Profile</string>
+    <string name="advisers">Advisers</string>
+    <string-array name="company">
+        <item>Individual</item>
+        <item>Company</item>
+    </string-array>
+    <string-array name="issues">
+        <item name="1">Growing Global Demand</item>
+        <item name="2">Climate Change</item>
+        <item name="3">Energy Cost</item>
+        <item name="4">The Labor Sorrow</item>
+        <item name="5">The Trade and Investment</item>
+        <item name="6">The critical issue in Water</item>
+        <item name="7">Rate and Impact of the Development in Technology</item>
+        <item name="8">The Safety and Security on Farms</item>
+        <item name="9">Biosecurity</item>
+        <item name="10">The Consumer Activism and Trends</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="secondary_text">Secondary Text</string>
+    <string name="supporting_text">Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC.</string>
+    <string name="title">Title</string>
+    <string name="awesome">Awesome</string>
+    <string name="enter_title">Enter title</string>
+    <string name="leave_a_reason">Leave a reason</string>
+    <string name="new_concern">New Concern</string>
+    <string name="upload_video">Upload Video</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="logout">Logout</string>
+    <string name="home">Home</string>
+    <string name="chat">Chat</string>
+    <string name="video">Video</string>
+    <string name="select_the_category">Select the category</string>
+    <string name="select_the_advisers">Select the advisers</string>
+</resources>

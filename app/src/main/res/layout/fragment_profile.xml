@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:paddingTop="16dp">
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:hint="@string/enter_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/client_name_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!-- //////// NAME FIELD  ////////  -->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:hint="@string/enter_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!-- //////// EMAIL FIELD  ////////  -->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:hint="@string/enter_contact_number">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contact_no_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!-- //////// CONTACT_NUMBER FIELD  ////////  -->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/company_text_input"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:hint="@string/enter_company">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/company_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textWebEditText" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!-- //////// COMPANY FIELD  ////////  -->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:id="@+id/companySize_text_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:endIconMode="dropdown_menu"
+            android:hint="@string/company_or_individual">
+
+            <AutoCompleteTextView
+                android:id="@+id/companySize_dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <!-- //////// COMPANY SIZE FIELD  ////////  -->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/location_text_input"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:hint="@string/location">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/location_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textWebEditText" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!-- //////// LOCATION SIZE FIELD  ////////  -->
+    </LinearLayout>
+
+</ScrollView>

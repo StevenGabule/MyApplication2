@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ConcernFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/concern_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:itemCount="5"
+        android:overScrollMode="ifContentScrolls"
+        tools:listitem="@layout/item_row_concerns" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:contentDescription="@string/awesome"
+        android:id="@+id/addConcern_floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:icon="@drawable/ic_plus"
+        app:iconTint="@color/white"
+        android:focusable="true"
+        android:text="@string/new_concern"
+        android:textColor="@color/white"
+        app:fabSize="mini"
+        android:layout_marginRight="24dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/concernsFragment"
+        android:icon="@drawable/ic_home"
+        android:enabled="true"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/postedFragment"
+        android:icon="@drawable/ic_chat"
+        android:enabled="true"
+        android:title="@string/chat" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_people"
+        android:enabled="true"
+        android:title="@string/advisers" />
+    <item
+        android:id="@+id/adviserFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_video_call_24"
+        android:title="@string/video" />
+</menu>
