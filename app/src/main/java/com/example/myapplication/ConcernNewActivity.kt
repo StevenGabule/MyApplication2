@@ -11,10 +11,12 @@ import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.core.widget.doOnTextChanged
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.myapplication.Constant.Companion.PUBLIC_IP
 import com.google.android.material.textfield.TextInputEditText
@@ -33,6 +35,8 @@ class ConcernNewActivity : AppCompatActivity() {
   private lateinit var submitButtonView: Button
   private val postURL: String = "$PUBLIC_IP/concern"
   private val fetchAdvisers: String = "$PUBLIC_IP/get-adviser-by-id"
+  private val getAdvisers: String = "$PUBLIC_IP/search-adviser-by-name"
+  private var userId = ""
 
   companion object {
     private const val IMAGE_PICK_CODE = 999
@@ -68,11 +72,10 @@ class ConcernNewActivity : AppCompatActivity() {
     // The minimum number of characters to type to show the drop down
     // issueDropDown.threshold = 10
 
-    issueDropDown.onItemClickListener = OnItemClickListener { parent, _, position, id->
+    issueDropDown.onItemClickListener = OnItemClickListener { parent, _, position, id ->
       val selectedItem = parent.getItemAtPosition(position).toString()
-      // Display the clicked item using toast
-      Toast.makeText(this,"Selected : $selectedItem",Toast.LENGTH_SHORT).show()
-      println("Selected : $selectedItem, id: $id")
+      val selectedItemId = parent.getItemIdAtPosition(position).toString().toInt()
+      println("Selected : $selectedItem, id: $id selectedItemId: ${selectedItemId + 1}")
       val requestQueue = Volley.newRequestQueue(this)
       val postData = JSONObject()
 
@@ -88,10 +91,11 @@ class ConcernNewActivity : AppCompatActivity() {
         "$fetchAdvisers/$id",
         null,
         { response ->
-//          println("response is: $response")
+          println("response is: $response")
           for (x in 0 until response.length()) {
-            println("response is: $x")
-            listNames += listOf(response.getJSONObject(x).getJSONObject("postedBy")["name"].toString())
+            listNames += listOf(
+              response.getJSONObject(x).getJSONObject("postedBy")["name"].toString()
+            )
           }
           val adapter1 = ArrayAdapter(this, R.layout.list_item, listNames)
           adviserACTV.setAdapter(adapter1)
@@ -103,40 +107,34 @@ class ConcernNewActivity : AppCompatActivity() {
       requestQueue.add(request)
     }
 
-    /*issueDropDown.doOnTextChanged { inputText, d, e, i ->
-      Log.d("LOGGING", "$inputText")
-      Log.d("i", "$i")
-      Log.d("d", "$d")
-      Log.d("e", "$e")
+    adviserACTV.onItemClickListener = OnItemClickListener { parent, _, position, id ->
+      val selectedName = parent.getItemAtPosition(position).toString()
       val requestQueue = Volley.newRequestQueue(this)
       val postData = JSONObject()
 
       try {
-        postData.put("id", i.toString())
+        postData.put("id", id.toString())
       } catch (e: JSONException) {
         e.printStackTrace()
       }
-      val listNames = mutableListOf("")
-      val request = JsonArrayRequest(
-        Request.Method.POST,
-        "$fetchAdvisers/$i",
+
+      val request = JsonObjectRequest(
+        Request.Method.GET,
+        "$getAdvisers/$selectedName",
         null,
         { response ->
-//          println("response is: $response")
-          for (x in 0 until response.length()) {
-            println("response is: $x")
-            listNames += listOf(response.getJSONObject(x).getJSONObject("postedBy")["name"].toString())
+          if (response.getJSONObject("adviser") != null) {
+            println("response is: $response")
+            userId = response.getJSONObject("adviser")["_id"].toString()
+            println("userId is: $userId")
           }
-          val adapter1 = ArrayAdapter(this, R.layout.list_item, listNames)
-          adviserACTV.setAdapter(adapter1)
         },
         {
           println("error is: $it")
         }
       )
       requestQueue.add(request)
-    }*/
-
+    }
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
   }
 
@@ -177,6 +175,7 @@ class ConcernNewActivity : AppCompatActivity() {
         val params: MutableMap<String, String> = HashMap()
         params["title"] = name.text.toString().trim()
         params["description"] = description.text.toString().trim()
+        params["assignBy"] = userId
         return params
       }
 

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:checkable="true"
     android:layout_margin="8dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/stroke_color"
     app:cardElevation="0dp">
 
     <LinearLayout
@@ -26,7 +32,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title"
-
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
             <TextView
@@ -46,7 +51,21 @@
                 android:text="@string/supporting_text"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
-
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip0"
+                app:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <com.google.android.material.chip.Chip
+                    android:padding="10dp"
+                    android:id="@+id/fileNameImage"
+                    android:clickable="false"
+                    app:chipIcon="@drawable/ic_image"
+                    app:chipIconTint="@color/red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/image_url"/>
+            </com.google.android.material.chip.ChipGroup>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

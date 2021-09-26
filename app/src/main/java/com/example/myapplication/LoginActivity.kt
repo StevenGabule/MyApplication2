@@ -17,7 +17,7 @@ import org.json.JSONObject
 
 
 class LoginActivity : AppCompatActivity() {
-
+  private var userType = 2
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_login)
@@ -29,11 +29,18 @@ class LoginActivity : AppCompatActivity() {
 
     val pref = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
     val checkIfLogin = pref.getBoolean("IS_LOGIN", false);
+    val userTypeLogin = pref.getInt("USER_TYPE", 2)
 
     if (checkIfLogin) {
-      val i = Intent(this, MainActivity::class.java)
-      startActivity(i)
-      finish()
+      if (userTypeLogin == 2) {
+        val i = Intent(this, MainActivity::class.java)
+        startActivity(i)
+        finish()
+      } else {
+        val i = Intent(this, AdviserHomeActivity::class.java)
+        startActivity(i)
+        finish()
+      }
     }
 
     loginButton.setOnClickListener {
@@ -60,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
             ClientInfo.name = response.getJSONObject("user")["name"].toString()
             ClientInfo.email = response.getJSONObject("user")["email"].toString()
             ClientInfo.userType = response.getJSONObject("user")["user_type"].toString().toInt()
+            userType = response.getJSONObject("user")["user_type"].toString().toInt()
             ClientInfo.token = response.getString("token").toString()
             ClientInfo.createdAt = response.getJSONObject("user")["createdAt"].toString()
             ClientInfo.updatedAt = response.getJSONObject("user")["updatedAt"].toString()
@@ -78,9 +86,18 @@ class LoginActivity : AppCompatActivity() {
               editor.putString("UPDATED_AT", response.getJSONObject("user")["updatedAt"].toString())
             }.apply()
 
-            val i = Intent(this, MainActivity::class.java)
-            startActivity(i)
-            finish()
+            if (userType == 2) {
+              // display the customer
+              val i = Intent(this, MainActivity::class.java)
+              startActivity(i)
+              finish()
+            } else {
+              // display the adviser
+              val i = Intent(this, AdviserHomeActivity::class.java)
+              startActivity(i)
+              finish()
+            }
+
           }) { error ->
           Log.e("API_ERROR_LOGIN", "$error")
           Toast.makeText(
