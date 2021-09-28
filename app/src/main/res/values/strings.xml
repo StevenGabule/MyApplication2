@@ -71,4 +71,7 @@
     <string name="enter_the_name">Enter the name</string>
     <string name="date_published">Date Published</string>
     <string name="status_new">New</string>
+    <string name="_449_one_time_payment">PHP 449 One Time Payment</string>
+    <string name="_958_monthly_payment">PHP 958 Monthly Payment</string>
+    <string name="_10_034_year_payment">PHP 10,034 Year Payment</string>
 </resources>

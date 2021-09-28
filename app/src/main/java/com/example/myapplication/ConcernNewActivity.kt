@@ -1,13 +1,17 @@
 package com.example.myapplication
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
@@ -19,6 +23,9 @@ import com.google.android.material.textfield.TextInputEditText
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.collections.set
 
 
 class ConcernNewActivity : AppCompatActivity() {
@@ -34,6 +41,9 @@ class ConcernNewActivity : AppCompatActivity() {
   private val getAdvisers: String = "$PUBLIC_IP/search-adviser-by-name"
   private var userId = ""
 
+  // Progress Dialog
+  private var pDialog: ProgressDialog? = null
+
   companion object {
     private const val IMAGE_PICK_CODE = 999
   }
@@ -42,6 +52,11 @@ class ConcernNewActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_concern_new)
     this.title = "Add new concern"
+
+    // Progress dialog
+    pDialog = ProgressDialog(this);
+    pDialog!!.setCancelable(false);
+
 
     imageView = findViewById(R.id.imageView)
 
@@ -57,6 +72,7 @@ class ConcernNewActivity : AppCompatActivity() {
     submitButtonView.setOnClickListener {
       uploadImage()
     }
+
     val issueDropDown = findViewById<AutoCompleteTextView>(R.id.issueAutoCompleteTextView)
     adviserACTV = findViewById(R.id.adviserAutoCompleteTextView)
 
@@ -67,8 +83,11 @@ class ConcernNewActivity : AppCompatActivity() {
     // Auto complete threshold
     // The minimum number of characters to type to show the drop down
     // issueDropDown.threshold = 10
-
     issueDropDown.onItemClickListener = OnItemClickListener { parent, _, position, id ->
+
+      pDialog?.setMessage("Fetching advisers...")
+      showDialog()
+
       val selectedItem = parent.getItemAtPosition(position).toString()
       val selectedItemId = parent.getItemIdAtPosition(position).toString().toInt()
       println("Selected : $selectedItem, id: $id selectedItemId: ${selectedItemId + 1}")
@@ -87,6 +106,7 @@ class ConcernNewActivity : AppCompatActivity() {
         "$fetchAdvisers/$id",
         null,
         { response ->
+          hideDialog()
           println("response is: $response")
           for (x in 0 until response.length()) {
             listNames += listOf(
@@ -104,6 +124,9 @@ class ConcernNewActivity : AppCompatActivity() {
     }
 
     adviserACTV.onItemClickListener = OnItemClickListener { parent, _, position, id ->
+      pDialog?.setMessage("Fetching advisers...")
+      showDialog()
+
       val selectedName = parent.getItemAtPosition(position).toString()
       val requestQueue = Volley.newRequestQueue(this)
       val postData = JSONObject()
@@ -119,6 +142,7 @@ class ConcernNewActivity : AppCompatActivity() {
         "$getAdvisers/$selectedName",
         null,
         { response ->
+          hideDialog()
           println("response is: $response")
           userId = response.getJSONObject("adviser")["_id"].toString()
           println("userId is: $userId")
@@ -146,6 +170,9 @@ class ConcernNewActivity : AppCompatActivity() {
   }
 
   private fun uploadImage() {
+    pDialog?.setMessage("Wait for awhile...")
+    showDialog()
+
     val pref = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
     val token = pref?.getString("TOKEN", null)
     imageData ?: return
@@ -153,7 +180,10 @@ class ConcernNewActivity : AppCompatActivity() {
       Method.POST,
       postURL,
       Response.Listener {
+        hideDialog()
         println("response is: $it")
+        val intent = Intent(this, SubscriptionActivity::class.java)
+        startActivity(intent)
         finish()
       },
       Response.ErrorListener {
@@ -200,6 +230,14 @@ class ConcernNewActivity : AppCompatActivity() {
       }
     }
     super.onActivityResult(requestCode, resultCode, data)
+  }
+
+  private fun showDialog() {
+    if (!pDialog!!.isShowing) pDialog!!.show()
+  }
+
+  private fun hideDialog() {
+    if (pDialog!!.isShowing) pDialog!!.dismiss()
   }
 }
 

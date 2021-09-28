@@ -71,6 +71,8 @@ class HomeFragment : Fragment() {
     concernNewButton.setOnClickListener {
       val i = Intent(view.context, ConcernNewActivity::class.java)
       startActivity(i)
+//      val intent = Intent(view.context, SubscriptionActivity::class.java)
+//      startActivity(intent)
     }
 
     return view
