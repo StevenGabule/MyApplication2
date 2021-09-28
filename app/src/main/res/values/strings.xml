@@ -60,9 +60,15 @@
     <string name="video">Video</string>
     <string name="select_the_category">Select the category</string>
     <string name="select_the_advisers">Select the advisers</string>
-    <string name="mark_as_done">Complete</string>
+    <string name="mark_as_done">Mark as done</string>
     <string name="image_url">Image Url</string>
     <string name="title_of_the_reason">Title of the reason</string>
     <string name="call">Call</string>
     <string name="display_the_url_image">Display the url image</string>
+    <string name="send_message">Send message</string>
+    <string name="write_a_message">Write a message</string>
+    <string name="message">Message</string>
+    <string name="enter_the_name">Enter the name</string>
+    <string name="date_published">Date Published</string>
+    <string name="status_new">New</string>
 </resources>

@@ -5,14 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
-import androidx.core.widget.doOnTextChanged
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
@@ -123,11 +119,9 @@ class ConcernNewActivity : AppCompatActivity() {
         "$getAdvisers/$selectedName",
         null,
         { response ->
-          if (response.getJSONObject("adviser") != null) {
-            println("response is: $response")
-            userId = response.getJSONObject("adviser")["_id"].toString()
-            println("userId is: $userId")
-          }
+          println("response is: $response")
+          userId = response.getJSONObject("adviser")["_id"].toString()
+          println("userId is: $userId")
         },
         {
           println("error is: $it")
@@ -160,6 +154,7 @@ class ConcernNewActivity : AppCompatActivity() {
       postURL,
       Response.Listener {
         println("response is: $it")
+        finish()
       },
       Response.ErrorListener {
         println("error is: $it")

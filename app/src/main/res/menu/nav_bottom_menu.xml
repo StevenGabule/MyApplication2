@@ -7,10 +7,10 @@
         android:enabled="true"
         android:title="@string/home" />
     <item
-        android:id="@+id/postedFragment"
-        android:icon="@drawable/ic_chat"
+        android:id="@+id/messageFragment"
+        android:icon="@drawable/ic_message"
         android:enabled="true"
-        android:title="@string/chat" />
+        android:title="@string/message" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_people"

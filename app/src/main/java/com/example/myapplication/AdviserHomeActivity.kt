@@ -1,8 +1,11 @@
 package com.example.myapplication
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,10 +19,42 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.myapplication.adapter.ConcernItemAdviserAdapter
 import com.example.myapplication.data.ConcernItemAdviser
+import com.google.firebase.messaging.FirebaseMessaging
 
 class AdviserHomeActivity : AppCompatActivity() {
   private val url = "${Constant.PUBLIC_IP}/advisers/fetch-adviser-concerns"
   private lateinit var recycleConcern: RecyclerView
+
+  private val TAG = "PushNotification"
+  private val CHANNEL_ID = "101"
+
+
+  private fun getToken() {
+    FirebaseMessaging.getInstance().token.addOnCompleteListener { task -> //If task is failed then
+      if (!task.isSuccessful) {
+        Log.d(TAG, "onComplete: Failed to get the Token")
+      }
+
+      //Token
+      val token = task.result
+      Log.d(TAG, "onComplete: $token")
+    }
+  }
+
+  private fun createNotificationChannel() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      val name: CharSequence = "firebaseNotificationChannel"
+      val description = "Receive Firebase notification"
+      val importance = NotificationManager.IMPORTANCE_DEFAULT
+      val channel = NotificationChannel(CHANNEL_ID, name, importance)
+      channel.description = description
+      val notificationManager = getSystemService(
+        NotificationManager::class.java
+      )
+      notificationManager.createNotificationChannel(channel)
+    }
+  }
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -64,11 +99,14 @@ class AdviserHomeActivity : AppCompatActivity() {
     } catch (e: Exception) {
       Log.e("CONCERN_FRAGMENT_ERROR", "$e")
     }
+
+    createNotificationChannel()
+    getToken()
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     val inflater = menuInflater
-    inflater.inflate(R.menu.menu, menu)
+    inflater.inflate(R.menu.menu_adviser, menu)
     return true
   }
 
@@ -80,6 +118,12 @@ class AdviserHomeActivity : AppCompatActivity() {
         editor.remove("IS_LOGIN")
         editor.apply()
         val i = Intent(this, LoginActivity::class.java)
+        startActivity(i)
+        finish()
+      }
+
+      R.id.idMessage -> {
+        val i = Intent(this, MessageAdviserActivity::class.java)
         startActivity(i)
         finish()
       }

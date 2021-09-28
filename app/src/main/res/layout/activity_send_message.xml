@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SendMessageActivity">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/messageTextInputEditText"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="@string/write_a_message"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:textSize="15sp"
+        tools:ignore="RtlHardcoded" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sendMessageButton"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send_message"
+        app:icon="@drawable/ic_message" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

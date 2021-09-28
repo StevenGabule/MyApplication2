@@ -19,14 +19,14 @@ import com.example.myapplication.data.ConcernItem
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 
-class ConcernFragment : Fragment() {
+class HomeFragment : Fragment() {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
     val url = "${Constant.PUBLIC_IP}/concerns"
     val list = ArrayList<ConcernItem>()
-    val view = inflater.inflate(R.layout.fragment_concern, container, false)
+    val view = inflater.inflate(R.layout.fragment_home, container, false)
     val rq: RequestQueue = Volley.newRequestQueue(view.context)
     val recycleConcern = view.findViewById<RecyclerView>(R.id.concern_recyclerview)
     val concernNewButton = view.findViewById<ExtendedFloatingActionButton>(R.id.addConcern_floatingActionButton)

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "825599912520",
+    "firebase_url": "https://tictoctoygameonline.firebaseio.com",
+    "project_id": "tictoctoygameonline",
+    "storage_bucket": "tictoctoygameonline.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825599912520:android:54f9f0e67c1b391cc3067d",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825599912520-hsefecqkic50d41a5qq8ee83v1mcvih6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwRcoIefGZiCUz_Sz98h2difQGWugWCCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825599912520-hsefecqkic50d41a5qq8ee83v1mcvih6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
