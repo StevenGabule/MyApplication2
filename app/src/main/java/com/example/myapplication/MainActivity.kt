@@ -24,16 +24,16 @@ import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
   private lateinit var navController: NavController
-  private val TAG = "PushNotification"
-  private val CHANNEL_ID = "101"
+  /*private val TAG = "PushNotification"
+  private val CHANNEL_ID = "101"*/
 
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    createNotificationChannel()
-    getToken()
+//    createNotificationChannel()
+//    getToken()
 
     val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
   }
 
-  private fun getToken() {
+  /*private fun getToken() {
     FirebaseMessaging.getInstance().token.addOnCompleteListener { task -> //If task is failed then
       if (!task.isSuccessful) {
         Log.d(TAG, "onComplete: Failed to get the Token")
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
       )
       notificationManager.createNotificationChannel(channel)
     }
-  }
+  }*/
 
   override fun onSupportNavigateUp(): Boolean {
     return navController.navigateUp() || super.onSupportNavigateUp()

@@ -63,17 +63,18 @@ class SubscriptionActivity : AppCompatActivity() {
     val contextView = findViewById<View>(R.id.context_view)
 
     subscriptionRG.setOnCheckedChangeListener { group, checkedId ->
-      if (checkedId == 2131362285) {
+
+      if (checkedId == 2131362288) {
         paypalAmount = "449.0"
         subScriptionType= 1
       }
 
-      if (checkedId == 2131362231) {
+      if (checkedId == 2131362234) {
         paypalAmount = "958.0"
         subScriptionType= 2
       }
 
-      if (checkedId == 2131362587) {
+      if (checkedId == 2131362594) {
         paypalAmount = "10034.0"
         subScriptionType= 3
       }

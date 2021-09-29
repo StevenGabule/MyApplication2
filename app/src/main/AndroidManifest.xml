@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PaymentSuccessActivity"></activity>
+        <activity android:name=".admin.AdminActivity"></activity>
+        <activity android:name=".PaymentSuccessActivity" />
         <activity android:name=".SubscriptionActivity" />
         <activity android:name=".MessageAdviserActivity" />
         <activity android:name=".MessageDetailActivity" />

@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.myapplication.ProfileFragment"
-        android:label="Advisers"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/adviserFragment"

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav_admin"
+    app:startDestination="@id/adminConcernsFragment">
+
+    <fragment
+        android:id="@+id/adminConcernsFragment"
+        android:name="com.example.myapplication.admin.ConcernFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_concern" />
+    <fragment
+        android:id="@+id/adminAdvisersFragment"
+        android:name="com.example.myapplication.admin.AdvisersFragment"
+        android:label="Message"
+        tools:layout="@layout/fragment_adviser" />
+    <fragment
+        android:id="@+id/adminClientFragment"
+        android:name="com.example.myapplication.admin.ClientsFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_clients" />
+    <fragment
+        android:id="@+id/adminSubscribersFragment"
+        android:name="com.example.myapplication.admin.SubscribersFragment"
+        android:label="Video Call"
+        tools:layout="@layout/fragment_subscribers" />
+</navigation>

@@ -54,8 +54,8 @@ class ConcernNewActivity : AppCompatActivity() {
     this.title = "Add new concern"
 
     // Progress dialog
-    pDialog = ProgressDialog(this);
-    pDialog!!.setCancelable(false);
+//    pDialog = ProgressDialog(this);
+//    pDialog!!.setCancelable(false);
 
 
     imageView = findViewById(R.id.imageView)
@@ -85,8 +85,8 @@ class ConcernNewActivity : AppCompatActivity() {
     // issueDropDown.threshold = 10
     issueDropDown.onItemClickListener = OnItemClickListener { parent, _, position, id ->
 
-      pDialog?.setMessage("Fetching advisers...")
-      showDialog()
+//      pDialog?.setMessage("Fetching advisers...")
+//      showDialog()
 
       val selectedItem = parent.getItemAtPosition(position).toString()
       val selectedItemId = parent.getItemIdAtPosition(position).toString().toInt()
@@ -106,7 +106,7 @@ class ConcernNewActivity : AppCompatActivity() {
         "$fetchAdvisers/$id",
         null,
         { response ->
-          hideDialog()
+          /*hideDialog()*/
           println("response is: $response")
           for (x in 0 until response.length()) {
             listNames += listOf(
@@ -124,8 +124,8 @@ class ConcernNewActivity : AppCompatActivity() {
     }
 
     adviserACTV.onItemClickListener = OnItemClickListener { parent, _, position, id ->
-      pDialog?.setMessage("Fetching advisers...")
-      showDialog()
+//      pDialog?.setMessage("Fetching advisers...")
+//      showDialog()
 
       val selectedName = parent.getItemAtPosition(position).toString()
       val requestQueue = Volley.newRequestQueue(this)
@@ -142,7 +142,7 @@ class ConcernNewActivity : AppCompatActivity() {
         "$getAdvisers/$selectedName",
         null,
         { response ->
-          hideDialog()
+          // hideDialog()
           println("response is: $response")
           userId = response.getJSONObject("adviser")["_id"].toString()
           println("userId is: $userId")
@@ -170,8 +170,8 @@ class ConcernNewActivity : AppCompatActivity() {
   }
 
   private fun uploadImage() {
-    pDialog?.setMessage("Wait for awhile...")
-    showDialog()
+//    pDialog?.setMessage("Wait for awhile...")
+//    showDialog()
 
     val pref = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
     val token = pref?.getString("TOKEN", null)
@@ -180,7 +180,7 @@ class ConcernNewActivity : AppCompatActivity() {
       Method.POST,
       postURL,
       Response.Listener {
-        hideDialog()
+        // hideDialog()
         println("response is: $it")
         val intent = Intent(this, SubscriptionActivity::class.java)
         startActivity(intent)

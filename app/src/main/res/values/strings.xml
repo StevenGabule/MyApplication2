@@ -74,4 +74,5 @@
     <string name="_449_one_time_payment">PHP 449 One Time Payment</string>
     <string name="_958_monthly_payment">PHP 958 Monthly Payment</string>
     <string name="_10_034_year_payment">PHP 10,034 Year Payment</string>
+    <string name="content_description_media">Support text1</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginBottom="16dp"
     app:cardElevation="0dp">
 
     <LinearLayout
@@ -12,6 +12,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="5dp">
+
+        <!-- Media -->
+        <ImageView
+            android:id="@+id/previewImageView"
+            android:layout_width="match_parent"
+            android:layout_height="194dp"
+            app:srcCompat="@drawable/plants"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/content_description_media"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +36,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title"
-
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
             <TextView
@@ -43,9 +52,63 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:scrollHorizontally="true"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="@string/supporting_text"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
+
+            <TextView
+                android:height="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/gray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <HorizontalScrollView
+                android:id="@+id/chipHorizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/statusChip"
+                    app:singleLine="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.Chip
+                        android:padding="10dp"
+                        android:id="@+id/statusPostChip"
+                        android:clickable="false"
+                        app:chipStrokeColor="@color/gray"
+                        app:chipStrokeWidth="2dp"
+                        app:chipIcon="@drawable/ic_baseline_legend_toggle_24"
+                        app:chipIconTint="@color/blues"
+                        android:background="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status_new"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:padding="10dp"
+                        android:id="@+id/assignPostChip"
+                        app:chipStrokeColor="@color/gray"
+                        app:chipStrokeWidth="2dp"
+                        android:clickable="false"
+
+                        android:background="@color/white"
+                        app:chipIcon="@drawable/ic_baseline_person_24"
+                        app:chipIconTint="@color/blues"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status_new"/>
+                </com.google.android.material.chip.ChipGroup>
+
+
+            </HorizontalScrollView>
+
 
         </LinearLayout>
     </LinearLayout>

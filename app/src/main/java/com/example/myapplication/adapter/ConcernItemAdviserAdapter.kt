@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Constant
 import com.example.myapplication.DetailConcernActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.ConcernItemAdviser
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_row_adviser_concerns.view.*
-import kotlinx.android.synthetic.main.item_row_concerns.view.description_textView
-import kotlinx.android.synthetic.main.item_row_concerns.view.postedBy_textView
-import kotlinx.android.synthetic.main.item_row_concerns.view.title_textView
 
 class ConcernItemAdviserAdapter(var context: Context, var list: ArrayList<ConcernItemAdviser>) :
   RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -30,7 +29,8 @@ class ConcernItemAdviserAdapter(var context: Context, var list: ArrayList<Concer
       list[position].description,
       list[position].postedBy,
       list[position].status,
-      list[position].fileName
+      list[position].fileName,
+      list[position].postedId,
     )
   }
 
@@ -39,11 +39,19 @@ class ConcernItemAdviserAdapter(var context: Context, var list: ArrayList<Concer
   }
 
   class ConcernItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(id: String, title: String, description: String, postedBy: String, status: Int, fileName: String) {
-      itemView.title_textView.text = title
-      itemView.description_textView.text = description
-      itemView.postedBy_textView.text = postedBy
+    fun bind(id: String, title: String, description: String, postedBy: String, status: Int, fileName: String, postedId: String) {
+      itemView.title_textView.text = title.toUpperCase()
+      itemView.description_textView.text = description.toUpperCase()
+      itemView.postedBy_textView.text = "Posted By: " + postedBy.toUpperCase()
       itemView.fileNameImage.text = fileName.lowercase()
+      Picasso.get().load("${Constant.STATIC_IP}/concern/${postedId}/${fileName}").into(itemView.previewImageView)
+      itemView.statusPostChip.text = when(status) {
+        1 -> "Completed"
+        2 -> "processing"
+        else -> {
+          "Pending"
+        }
+      }
       itemView.setOnClickListener {
         val obj = Intent(itemView.context, DetailConcernActivity::class.java)
         obj.putExtra("concernId", id)

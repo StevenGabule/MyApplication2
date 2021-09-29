@@ -10,4 +10,6 @@
     <color name="background_color">#eeeeee</color>
     <color name="stroke_color">#eeeeee</color>
     <color name="red">#EC0000</color>
+    <color name="gray">#DFDFDF</color>
+    <color name="blues">#6200EE</color>
 </resources>

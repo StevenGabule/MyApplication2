@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.myapplication.admin.AdminActivity
 import com.example.myapplication.data.ClientInfo
 import org.json.JSONException
 import org.json.JSONObject
@@ -34,6 +35,10 @@ class LoginActivity : AppCompatActivity() {
     if (checkIfLogin) {
       if (userTypeLogin == 2) {
         val i = Intent(this, MainActivity::class.java)
+        startActivity(i)
+        finish()
+      } else if (userTypeLogin == 3) {
+        val i = Intent(this, AdminActivity::class.java)
         startActivity(i)
         finish()
       } else {
@@ -74,13 +79,22 @@ class LoginActivity : AppCompatActivity() {
 
             editor.apply {
               editor.putBoolean("IS_LOGIN", true)
-              editor.putInt("USER_TYPE", response.getJSONObject("user")["user_type"].toString().toInt())
+              editor.putInt(
+                "USER_TYPE",
+                response.getJSONObject("user")["user_type"].toString().toInt()
+              )
               editor.putString("NAME", response.getJSONObject("user")["name"].toString())
               editor.putString("EMAIL", response.getJSONObject("user")["email"].toString())
-              editor.putString("CONTACT_NO", response.getJSONObject("user")["contact_no"].toString())
+              editor.putString(
+                "CONTACT_NO",
+                response.getJSONObject("user")["contact_no"].toString()
+              )
               editor.putString("LOCATION", response.getJSONObject("user")["location"].toString())
               editor.putString("COMPANY", response.getJSONObject("user")["company"].toString())
-              editor.putInt("COMPANY_TYPE", response.getJSONObject("user")["company_type"].toString().toInt())
+              editor.putInt(
+                "COMPANY_TYPE",
+                response.getJSONObject("user")["company_type"].toString().toInt()
+              )
               editor.putString("TOKEN", response.getString("token").toString())
               editor.putString("CREATED_AT", response.getJSONObject("user")["createdAt"].toString())
               editor.putString("UPDATED_AT", response.getJSONObject("user")["updatedAt"].toString())
@@ -89,6 +103,10 @@ class LoginActivity : AppCompatActivity() {
             if (userType == 2) {
               // display the customer
               val i = Intent(this, MainActivity::class.java)
+              startActivity(i)
+              finish()
+            } else if (userTypeLogin == 3) {
+              val i = Intent(this, AdminActivity::class.java)
               startActivity(i)
               finish()
             } else {

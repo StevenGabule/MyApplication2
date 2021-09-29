@@ -7,4 +7,5 @@ class ConcernItemAdviser(
   var postedBy: String,
   var status: Int,
   var fileName: String,
+  var postedId: String,
 )

@@ -18,7 +18,6 @@ import com.example.myapplication.adapter.ConcernItemAdapter
 import com.example.myapplication.data.ConcernItem
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
-
 class HomeFragment : Fragment() {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +40,11 @@ class HomeFragment : Fragment() {
               response.getJSONObject(x).getString("title"),
               response.getJSONObject(x).getString("description"),
               response.getJSONObject(x).getJSONObject("postedBy")["name"].toString(),
-              response.getJSONObject(x).getInt("status")
+              response.getJSONObject(x).getInt("status"),
+              response.getJSONObject(x).getJSONObject("assignBy")["name"].toString(),
+              response.getJSONObject(x).getString("concern_file"),
+              response.getJSONObject(x).getString("createdForHuman"),
+              response.getJSONObject(x).getJSONObject("postedBy")["_id"].toString(),
             )
           )
         }
@@ -69,10 +72,10 @@ class HomeFragment : Fragment() {
     })
 
     concernNewButton.setOnClickListener {
-      val i = Intent(view.context, ConcernNewActivity::class.java)
-      startActivity(i)
 //      val intent = Intent(view.context, SubscriptionActivity::class.java)
 //      startActivity(intent)
+      val i = Intent(view.context, ConcernNewActivity::class.java)
+      startActivity(i)
     }
 
     return view

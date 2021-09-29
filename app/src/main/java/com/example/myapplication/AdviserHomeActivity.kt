@@ -79,6 +79,7 @@ class AdviserHomeActivity : AppCompatActivity() {
               response.getJSONObject(x).getJSONObject("postedBy")["name"].toString(),
               response.getJSONObject(x).getInt("status"),
               response.getJSONObject(x).getString("concern_file"),
+              response.getJSONObject(x).getJSONObject("postedBy")["_id"].toString(),
             )
           )
         }
