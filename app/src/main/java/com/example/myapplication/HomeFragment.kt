@@ -19,6 +19,7 @@ import com.example.myapplication.data.ConcernItem
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class HomeFragment : Fragment() {
+
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
@@ -72,8 +73,6 @@ class HomeFragment : Fragment() {
     })
 
     concernNewButton.setOnClickListener {
-//      val intent = Intent(view.context, SubscriptionActivity::class.java)
-//      startActivity(intent)
       val i = Intent(view.context, ConcernNewActivity::class.java)
       startActivity(i)
     }

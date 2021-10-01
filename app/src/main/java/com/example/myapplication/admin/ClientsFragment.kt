@@ -1,60 +1,73 @@
 package com.example.myapplication.admin
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
+import com.example.myapplication.Constant
 import com.example.myapplication.R
+import com.example.myapplication.adapter.AdminAdvisersItemAdapter
+import com.example.myapplication.adapter.AdminClientItemAdapter
+import com.example.myapplication.data.AdminAdvisersItem
+import com.example.myapplication.data.AdminClientsItem
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ClientsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ClientsFragment : Fragment() {
-  // TODO: Rename and change types of parameters
-  private var param1: String? = null
-  private var param2: String? = null
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    arguments?.let {
-      param1 = it.getString(ARG_PARAM1)
-      param2 = it.getString(ARG_PARAM2)
-    }
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_clients, container, false)
-  }
+    val view =  inflater.inflate(R.layout.fragment_clients, container, false)
+    val rq: RequestQueue = Volley.newRequestQueue(view.context)
+    val recycleAdminClientView = view.findViewById<RecyclerView>(R.id.adminClientRV)
 
-  companion object {
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ClientsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    @JvmStatic
-    fun newInstance(param1: String, param2: String) =
-      ClientsFragment().apply {
-        arguments = Bundle().apply {
-          putString(ARG_PARAM1, param1)
-          putString(ARG_PARAM2, param2)
+    try {
+      val pref = view.context.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+      val token = pref?.getString("TOKEN", null)
+      val url = "${Constant.PUBLIC_IP}/admin/users/account"
+      val list = ArrayList<AdminClientsItem>()
+      val jar = object : JsonArrayRequest(Method.GET, url, null, { response ->
+        for (x in 0 until response.length()) {
+          list.add(
+            AdminClientsItem(
+              response.getJSONObject(x).getString("_id"),
+              response.getJSONObject(x).getString("avatar"),
+              response.getJSONObject(x).getString("name"),
+              response.getJSONObject(x).getString("createdForHuman"),
+              response.getJSONObject(x).getString("createdFormatted"),
+              response.getJSONObject(x).getString("location"),
+              response.getJSONObject(x).getString("company"),
+              response.getJSONObject(x).getString("contact_no"),
+            )
+          )
+        }
+        val adp = AdminClientItemAdapter(view.context, list)
+        recycleAdminClientView.layoutManager = LinearLayoutManager(view.context)
+        recycleAdminClientView.adapter = adp
+      }, { error ->
+        Log.e("API_CLIENT_FETCH", "$error.message")
+        Toast.makeText(view.context, error.message, Toast.LENGTH_LONG).show()
+      }) {
+        override fun getHeaders(): MutableMap<String, String> {
+          val params: MutableMap<String, String> = HashMap()
+          params["Authorization"] = "Bearer $token"
+          return params
         }
       }
+      rq.add(jar)
+    } catch (e: Exception) {
+      Log.e("API_CLIENT_ERROR", "$e")
+    }
+    return view
   }
 }

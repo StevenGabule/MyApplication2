@@ -105,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
               val i = Intent(this, MainActivity::class.java)
               startActivity(i)
               finish()
-            } else if (userTypeLogin == 3) {
+            } else if (userType == 3) {
               val i = Intent(this, AdminActivity::class.java)
               startActivity(i)
               finish()

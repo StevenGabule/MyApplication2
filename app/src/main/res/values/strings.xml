@@ -75,4 +75,8 @@
     <string name="_958_monthly_payment">PHP 958 Monthly Payment</string>
     <string name="_10_034_year_payment">PHP 10,034 Year Payment</string>
     <string name="content_description_media">Support text1</string>
+    <string name="users">Users</string>
+    <string name="subscribers">Subscribers</string>
+    <string name="clients">Clients</string>
+    <string name="dashboard">Dashboard</string>
 </resources>

@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".admin.AdminActivity"></activity>
+        <activity android:name=".admin.DashboardActivity" />
+        <activity android:name=".admin.ClientPostActivity" />
+        <activity android:name=".admin.ConcernDetailActivity" />
+        <activity android:name=".admin.AdvisersClientActivity" />
+        <activity android:name=".admin.AdminActivity" />
         <activity android:name=".PaymentSuccessActivity" />
         <activity android:name=".SubscriptionActivity" />
         <activity android:name=".MessageAdviserActivity" />
@@ -27,15 +31,17 @@
         <activity android:name=".AdviserHomeActivity" />
         <activity android:name=".AdviserActivity" />
         <activity android:name=".ConcernNewActivity" />
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity" />
-        <activity android:name=".RegisterActivity" /> <!-- Firebase Messaging Service -->
+        <activity android:name=".RegisterActivity" />
+
         <service android:name=".notifications.MyFirebaseServices">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

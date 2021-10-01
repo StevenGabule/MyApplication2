@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import com.android.volley.RequestQueue
@@ -63,23 +64,22 @@ class SubscriptionActivity : AppCompatActivity() {
     val contextView = findViewById<View>(R.id.context_view)
 
     subscriptionRG.setOnCheckedChangeListener { group, checkedId ->
-
-      if (checkedId == 2131362288) {
+      val radioId = findViewById<RadioButton>(checkedId)
+      Log.d("radioId", "${radioId.text}")
+      if (radioId.text == "PHP 449 One Time Payment") {
         paypalAmount = "449.0"
         subScriptionType= 1
       }
 
-      if (checkedId == 2131362234) {
+      if (radioId.text == "PHP 958 Monthly Payment") {
         paypalAmount = "958.0"
         subScriptionType= 2
       }
 
-      if (checkedId == 2131362594) {
+      if (radioId.text == "PHP 10,034 Year Payment") {
         paypalAmount = "10034.0"
         subScriptionType= 3
       }
-
-      Log.d("checkedId...", "$checkedId")
     }
 
     payPalButton.onEligibilityStatusChanged =

@@ -1,60 +1,78 @@
 package com.example.myapplication.admin
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
+import com.example.myapplication.Constant
 import com.example.myapplication.R
+import com.example.myapplication.adapter.AdminAdvisersItemAdapter
+import com.example.myapplication.adapter.AdminSubscribersItemAdapter
+import com.example.myapplication.data.AdminAdvisersItem
+import com.example.myapplication.data.AdminSubscriberItem
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SubscribersFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SubscribersFragment : Fragment() {
-  // TODO: Rename and change types of parameters
-  private var param1: String? = null
-  private var param2: String? = null
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    arguments?.let {
-      param1 = it.getString(ARG_PARAM1)
-      param2 = it.getString(ARG_PARAM2)
-    }
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_subscribers, container, false)
-  }
+    val view =  inflater.inflate(R.layout.fragment_subscribers, container, false)
+    val rq: RequestQueue = Volley.newRequestQueue(view.context)
+    val recycleAdminSubscriberView = view.findViewById<RecyclerView>(R.id.adminSubscriberRV)
 
-  companion object {
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SubscribersFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    @JvmStatic
-    fun newInstance(param1: String, param2: String) =
-      SubscribersFragment().apply {
-        arguments = Bundle().apply {
-          putString(ARG_PARAM1, param1)
-          putString(ARG_PARAM2, param2)
+    try {
+      val pref = view.context.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+      val token = pref?.getString("TOKEN", null)
+      val url = "${Constant.PUBLIC_IP}/admin/subscribers"
+      val list = ArrayList<AdminSubscriberItem>()
+      val jar = object : JsonArrayRequest(Method.GET, url, null, { response ->
+        for (x in 0 until response.length()) {
+          list.add(
+            AdminSubscriberItem(
+              response.getJSONObject(x).getString("_id"),
+              response.getJSONObject(x).getJSONObject("userId")["name"].toString(),
+              response.getJSONObject(x).getInt("subscriptionType"),
+              response.getJSONObject(x).getJSONObject("userId")["email"].toString(),
+              response.getJSONObject(x).getJSONObject("userId")["contact_no"].toString(),
+              response.getJSONObject(x).getString("subscriptionStart"),
+              response.getJSONObject(x).getString("subscriptionEnd"),
+              response.getJSONObject(x).getString("createdForHuman"),
+            )
+          )
+        }
+        val adp = AdminSubscribersItemAdapter(view.context, list)
+        recycleAdminSubscriberView.layoutManager = LinearLayoutManager(view.context)
+        recycleAdminSubscriberView.adapter = adp
+      }, { error ->
+        Log.e("API_SUBSCRIBERS_FETCH", "$error.message")
+        Toast.makeText(view.context, error.message, Toast.LENGTH_LONG).show()
+      }) {
+        override fun getHeaders(): MutableMap<String, String> {
+          val params: MutableMap<String, String> = HashMap()
+          params["Authorization"] = "Bearer $token"
+          return params
         }
       }
+      rq.add(jar)
+    } catch (e: Exception) {
+      Log.e("SUBSCRIBERS_FRAG_ERROR", "$e")
+    }
+
+    return view
   }
+
+
 }

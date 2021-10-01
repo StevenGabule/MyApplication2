@@ -11,26 +11,32 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.LoginActivity
 import com.example.myapplication.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AdminActivity : AppCompatActivity() {
   private lateinit var adminNavController: NavController
+  private lateinit var adminBottomNavigationView: BottomNavigationView
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_admin)
 
+    adminBottomNavigationView = findViewById(R.id.adminBottomNavigationView)
     adminNavController = findNavController(R.id.navAdminHostFragment)
+
     val appBarConfiguration = AppBarConfiguration(
       setOf(
-        R.id.adminConcernsFragment,
+        R.id.adminHomeFragment,
         R.id.adminAdvisersFragment,
         R.id.adminClientFragment,
         R.id.adminSubscribersFragment,
       )
     )
 
+    adminBottomNavigationView.setupWithNavController(adminNavController)
     setupActionBarWithNavController(adminNavController, appBarConfiguration)
   }
 
@@ -54,6 +60,11 @@ class AdminActivity : AppCompatActivity() {
         val i = Intent(this, LoginActivity::class.java)
         startActivity(i)
         finish()
+      }
+
+      R.id.idDashboard -> {
+        val i = Intent(this, DashboardActivity::class.java)
+        startActivity(i)
       }
     }
     return super.onOptionsItemSelected(item)

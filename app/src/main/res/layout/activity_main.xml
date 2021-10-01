@@ -29,6 +29,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_anchorGravity="bottom"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/nav_bottom_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

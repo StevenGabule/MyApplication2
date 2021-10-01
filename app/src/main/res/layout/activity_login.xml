@@ -94,18 +94,18 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/register_adviser_ButtonView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:text="@string/become_an_adviser" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/register_adviser_ButtonView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:text="@string/become_an_adviser" />-->
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
     </LinearLayout>
 </ScrollView>

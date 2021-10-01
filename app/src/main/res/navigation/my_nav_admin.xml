@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav_admin"
-    app:startDestination="@id/adminConcernsFragment">
+    app:startDestination="@id/adminHomeFragment">
 
     <fragment
-        android:id="@+id/adminConcernsFragment"
+        android:id="@+id/adminHomeFragment"
         android:name="com.example.myapplication.admin.ConcernFragment"
         android:label="Home"
         tools:layout="@layout/fragment_concern" />
     <fragment
         android:id="@+id/adminAdvisersFragment"
         android:name="com.example.myapplication.admin.AdvisersFragment"
-        android:label="Message"
+        android:label="Advisers"
         tools:layout="@layout/fragment_adviser" />
     <fragment
         android:id="@+id/adminClientFragment"
         android:name="com.example.myapplication.admin.ClientsFragment"
-        android:label="Profile"
+        android:label="Clients"
         tools:layout="@layout/fragment_clients" />
     <fragment
         android:id="@+id/adminSubscribersFragment"
         android:name="com.example.myapplication.admin.SubscribersFragment"
-        android:label="Video Call"
+        android:label="Subscribers"
         tools:layout="@layout/fragment_subscribers" />
 </navigation>

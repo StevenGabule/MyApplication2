@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/adminHomeFragment"
+        android:icon="@drawable/ic_home"
+        android:enabled="true"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/adminAdvisersFragment"
+        android:icon="@drawable/ic_light_bolt"
+        android:enabled="true"
+        android:title="@string/advisers" />
+    <item
+        android:id="@+id/adminClientFragment"
+        android:icon="@drawable/ic_people"
+        android:enabled="true"
+        android:title="@string/clients" />
+    <item
+        android:id="@+id/adminSubscribersFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_subscibers"
+        android:title="@string/subscribers" />
+</menu>
